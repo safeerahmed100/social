@@ -48,4 +48,10 @@ class User extends Authenticatable implements MustVerifyEmail,CanResetPassword
             'password' => 'hashed',
         ];
     }
+    public function Post(){
+       return  $this->hasMany(Post::class);
+    }
+    public function Comment(){
+        return $this->hasMany(Comment::class);
+    }
 }
