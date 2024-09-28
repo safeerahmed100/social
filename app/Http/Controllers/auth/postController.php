@@ -27,8 +27,12 @@ class postController extends Controller
         if(!$validate->fails()){
             $post = new Post();
             $post->user_id = $user->id;
-            $post->image = $request->image;
             $post->post_content = $request->post_content;
+            if ($request->hasFile('image')) {
+                // Store image and get the path
+                $path = $request->file('image')->store('profile_pictures', 'public');
+                $post->image = $path;
+            }
             $post->save();
             return response()->json([
                 "message"=>"Post Created",
