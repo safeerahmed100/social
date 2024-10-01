@@ -10,6 +10,7 @@ use App\Http\controllers\auth\commentController;
 
 use Illuminate\Support\Facades\Route;
 
+
 Route::middleware('guest')->group(function(){
     Route::get('/',[loginController::class,'index'])->name('login.view');
     Route::post('/login',[loginController::class,'login'])->name('login');

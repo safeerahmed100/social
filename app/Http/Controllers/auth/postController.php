@@ -11,7 +11,7 @@ class postController extends Controller
 {
     public function getPost() {
        
-        $posts = Post::with(['user', 'comments'])->get();
+        $posts = Post::with(['user','comments.user'])->get();
     
         return response()->json($posts);
     }
@@ -30,7 +30,7 @@ class postController extends Controller
             $post->post_content = $request->post_content;
             if ($request->hasFile('image')) {
                 // Store image and get the path
-                $path = $request->file('image')->store('profile_pictures', 'public');
+                $path = $request->file('image')->store('post_pictures', 'public');
                 $post->image = $path;
             }
             $post->save();
